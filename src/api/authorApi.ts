@@ -15,7 +15,7 @@ export function saveAuthor(author: any) {
     .catch(handleError);
 }
 
-export function deleteAuthor(authorId: string) {
+export function deleteAuthor(authorId: any) {
   return fetch(baseUrl + authorId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
