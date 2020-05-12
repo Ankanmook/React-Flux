@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-
 function Header() {
   const activeStyle = { color: "orange" };
   return (
@@ -14,7 +13,7 @@ function Header() {
         Courses
       </NavLink>
       {" | "}
-      <NavLink activeStyle={activeStyle} to="/courses">
+      <NavLink activeStyle={activeStyle} to="/about">
         About
       </NavLink>
     </nav>
