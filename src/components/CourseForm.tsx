@@ -67,13 +67,3 @@ const CourseFormPropType = {
 type CourseFormProps = InferProps<typeof CourseFormPropType>;
 
 export default CourseForm;
-
-// courses: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       title: PropTypes.string.isRequired,
-//       authorId: PropTypes.number.isRequired,
-//       category: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
