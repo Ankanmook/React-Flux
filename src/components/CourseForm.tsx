@@ -1,7 +1,8 @@
 import React from "react";
 import TextInput from "./common/TextInput";
+import PropTypes, { InferProps } from "prop-types";
 
-function CourseForm(props: any) {
+function CourseForm(props: CourseFormProps) {
   return (
     <form onSubmit={props.onSubmit}>
       <TextInput
@@ -46,4 +47,33 @@ function CourseForm(props: any) {
   );
 }
 
+const CourseFormPropType = {
+  course: PropTypes.shape({
+    id: PropTypes.string,
+    slug: PropTypes.string,
+    authorId: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  }).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  errors: PropTypes.shape({
+    title: PropTypes.string,
+    authorId: PropTypes.string,
+    category: PropTypes.string,
+  }).isRequired,
+};
+
+type CourseFormProps = InferProps<typeof CourseFormPropType>;
+
 export default CourseForm;
+
+// courses: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       title: PropTypes.string.isRequired,
+//       authorId: PropTypes.number.isRequired,
+//       category: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+// };

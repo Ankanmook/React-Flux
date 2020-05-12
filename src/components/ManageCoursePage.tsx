@@ -11,7 +11,7 @@ const ManageCoursePage = (props: any) => {
     id: null,
     slug: "",
     title: "",
-    authorId: null,
+    authorId: "",
     category: "",
   });
 
@@ -32,7 +32,11 @@ const ManageCoursePage = (props: any) => {
   }
 
   function formIsValid() {
-    const _errors: any = {};
+    const _errors: errorType = {
+      title: "",
+      authorId: "",
+      category: "",
+    };
 
     if (!course.title) _errors.title = "Title is required";
     if (!course.authorId) _errors.authorId = "Author is required";
@@ -68,5 +72,17 @@ const ManageCoursePage = (props: any) => {
     </>
   );
 };
+
+interface errorType {
+  title: string;
+  authorId: string;
+  category: string;
+}
+
+interface courseType {
+  title: string;
+  authorId: string;
+  category: string;
+}
 
 export default ManageCoursePage;
