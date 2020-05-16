@@ -23,7 +23,7 @@ class CourseStore extends EventEmitter {
     return _courses;
   }
 
-  getCouseBySlug(slug: string) {
+  getCourseBySlug(slug: any) {
     return _courses.find((course: any) => course.slug === slug);
   }
 }
@@ -37,12 +37,18 @@ Dispatcher.register((action: any) => {
       break;
     case actionTypes.UPDATE_COURSE:
       _courses = _courses.map((course: any) =>
-        course.id === action.counse.id ? action.course : course
+        course.id === action.course.id ? action.course : course
       );
       store.emitChange();
       break;
     case actionTypes.LOAD_COURSES:
       _courses = action.courses;
+      store.emitChange();
+      break;
+    case actionTypes.DELETE_COURSE:
+      _courses = _courses.filter(
+        (course: any) => course.id !== parseInt(action.id, 10) //iterate over courses and filter out the course id that was just deleted
+      );
       store.emitChange();
       break;
     default:

@@ -17,8 +17,17 @@ export function saveCouse(course: any): Promise<any> {
 export function loadCourses(): Promise<any> {
   return courseApi.getCourses().then((courses) => {
     dispatcher.dispatch({
-      action: actionTypes.LOAD_COURSES,
+      actionType: actionTypes.LOAD_COURSES,
       courses: courses,
+    });
+  });
+}
+
+export function deleteCourse(id: any) {
+  return courseApi.deleteCourse(id).then(() => {
+    dispatcher.dispatch({
+      actionType: actionTypes.DELETE_COURSE,
+      id: id,
     });
   });
 }

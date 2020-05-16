@@ -9,6 +9,9 @@ import * as courseActions from "../actions/courseActions";
 const ManageCoursePage = (props: any) => {
   const [errors, setErrors] = useState({});
 
+  //store course in array of courses
+  const [courses, setCourses] = useState(courseStore.getCourses());
+
   const [course, setCourse] = useState({
     id: null,
     slug: "",
@@ -18,13 +21,19 @@ const ManageCoursePage = (props: any) => {
   });
 
   useEffect(() => {
-    const slug = props.match.params.slug; //pulled from the path '/courses/:slug
-    if (slug) {
-      courseStore
-        .getCouseBySlug(slug)
-        .then((_course: any) => setCourse(_course));
+    courseStore.addChangeListener(onChange); //run onChange function when the Flux store changes
+    const slug = props.match.params.slug; // from the path `/courses/:slug`
+    if (courses.length === 0) {
+      courseActions.loadCourses();
+    } else if (slug) {
+      setCourse(courseStore.getCourseBySlug(slug));
     }
-  }, [props.match.params.slug]);
+    return () => courseStore.removeChangeListener(onChange); //cleanup
+  }, [courses.length, props.match.params.slug]);
+
+  function onChange() {
+    setCourses(courseStore.getCourses());
+  }
 
   // function handleChange(event: any) {
   //   const updatedCourse = {
